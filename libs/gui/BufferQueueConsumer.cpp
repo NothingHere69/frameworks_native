@@ -334,6 +334,7 @@ status_t BufferQueueConsumer::detachBuffer(int slot) {
         return BAD_VALUE;
     }
 
+    const int totalSlotCount = mCore->getTotalSlotCountLocked();
     if (slot < 0 || slot >= totalSlotCount) {
         BQ_LOGE("detachBuffer: slot index %d out of range [0, %d)", slot, totalSlotCount);
         return BAD_VALUE;
@@ -350,7 +351,6 @@ status_t BufferQueueConsumer::detachBuffer(int slot) {
     mCore->notifyBufferReleased();
 
     VALIDATE_CONSISTENCY();
-
     return NO_ERROR;
 }
 
